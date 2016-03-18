@@ -40,9 +40,9 @@ app.get('/suggestions', (req, res) => {
   if (req.query.releaseId === undefined) {
     res.status(400).send('releaseId get param must be provided');
     return;
-  }
+  }  
   
-  suggestionService.getSuggestions(req.query.releaseTitle, req.query.releaseId)
+  suggestionService.getSuggestions(req.query.releaseTitle, req.query.releaseId, req.query.limit || 3)
     .then((suggestions) => {
       res.send(suggestions);
     });

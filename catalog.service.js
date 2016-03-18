@@ -1,3 +1,5 @@
+'use strict';
+
 const agent = require('multiagent');
 const DISCOVERY_SERVERS = process.env.DISCOVERY_SERVERS
   ? process.env.DISCOVERY_SERVERS.split(',')

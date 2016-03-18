@@ -1,9 +1,15 @@
-const catalogService = require('./catalog.service.js');
+'use strict';
 
-function getSuggestions(releaseTitle, currentReleaseId) {
+const catalogService = require('./catalog.service');
+const randomService = require('./random.service');
+
+function getSuggestions(releaseTitle, currentReleaseId, limit) {
   return catalogService
-    .get('/cds')
-    .then(res => res.body.filter((cd) => cd.id !== currentReleaseId))
+    .get('/cds?title=ereer')
+    .then(res => {
+      const filteredCds = res.body.filter((cd) => cd.id !== currentReleaseId);
+      return randomService.getRandomItems(filteredCds, limit);
+    })
     .catch(err => console.log(err));
 }
 
