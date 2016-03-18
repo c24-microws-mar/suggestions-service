@@ -9,6 +9,7 @@ Query examples:
 /suggestions/?releaseId=123-asdas-456546
 /suggestions/?releaseId=123-asdas-456546&limit=5
 /suggestions/?releaseId[]=123-asdas-456546&releaseId[]=123-asdas-werwer&&limit=5
+/suggestions/?releaseId[]=0092da17-9b78-4c82-b738-21ee159125a3&releaseId[]=2af14d71-4333-494a-a981-7701897e3f1c&limit=4
 ~~~
 The following npm scripts are available:
 
