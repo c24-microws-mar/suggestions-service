@@ -1,14 +1,20 @@
 'use strict';
 
-const agent = require('multiagent');
-const DISCOVERY_SERVERS = process.env.DISCOVERY_SERVERS
-  ? process.env.DISCOVERY_SERVERS.split(',')
-  : ['http://46.101.245.190:8500', 'http://46.101.132.55:8500', 'http://46.101.193.82:8500'];
+const serviceDiscovery = require('./service-discovery');
+const client = serviceDiscovery.getClient('catalog-service', 'v2');
+
+const catalogService = {
   
-const catalogService = agent.client({
-  discovery: 'consul',
-  discoveryServers: DISCOVERY_SERVERS,
-  serviceName: 'catalog-service'
-});
+  getCdList: (title) => {
+    return client.get(`/cds?title=${encodeURIComponent(title)}`)
+      .then((res) => res.body);
+  },
+  
+  getCd: (id) => {
+    return client.get(`/cd/${id}`)
+      .then((res) => res.body);
+  }  
+  
+};
 
 module.exports = catalogService;

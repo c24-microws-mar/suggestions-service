@@ -31,18 +31,12 @@ app.get(SERVICE_ENDPOINTS, endpoints());
 
 // Add all other service routes
 app.get('/suggestions', (req, res) => {
-  
-  if (req.query.releaseTitle === undefined) {
-    res.status(400).send('releaseTitle get param must be provided');
-    return;
-  }
-  
   if (req.query.releaseId === undefined) {
     res.status(400).send('releaseId get param must be provided');
     return;
   }  
   
-  suggestionService.getSuggestions(req.query.releaseTitle, req.query.releaseId, req.query.limit || 3)
+  suggestionService.getSuggestions(req.query.releaseId, req.query.limit || 3)
     .then((suggestions) => {
       res.send(suggestions);
     });
