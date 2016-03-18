@@ -5,9 +5,10 @@ This is a suggestions service
 ## How to use
 
 Query examples:
+~~~
 /suggestions/?releaseTitle=innuendo&releaseId=123-asdas-456546
 /suggestions/?releaseTitle=innuendo&releaseId=123-asdas-456546&limit=5
-
+~~~
 The following npm scripts are available:
 
 ~~~ sh
