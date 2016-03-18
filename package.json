@@ -1,6 +1,6 @@
 {
   "name": "suggestions-service",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "This is a service example",
   "author": "Andreas Helmberger <public@ahelmberger.de>",
   "license": "MIT",
@@ -17,7 +17,8 @@
     "express-endpoints": "^1.0.0",
     "http-graceful-shutdown": "^1.0.6",
     "lodash": "^4.6.1",
-    "multiagent": "^1.1.0"
+    "multiagent": "^1.1.0",
+    "should": "^8.2.2"
   },
   "devDependencies": {
     "expect.js": "^0.3.1",
