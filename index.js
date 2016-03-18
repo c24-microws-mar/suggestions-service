@@ -27,16 +27,28 @@ app.get(SERVICE_CHECK_HTTP, (req, res) => res.send({ uptime: process.uptime() })
 // Add metadata endpoint
 app.get(SERVICE_ENDPOINTS, endpoints());
 
+
+const catalogClient = agent.client({
+  discovery: 'consul',
+  discoveryServers: DISCOVERY_SERVERS,
+  serviceName: 'catalog-service'
+});
+
+
 // Add all other service routes
-app.get('/superstars', (req, res) => {
-  res.send([
-    'Scarlett Johansson',
-    'Leonardo DiCaprio',
-    'Jennifer Lawrence',
-    'Ashton Kutcher',
-    'Kate Beckinsale',
-    'Robert Downey Jr.'
-  ]);
+app.get('/suggestions', (req, res) => {
+  
+  // validation
+  
+  const releaseTitle = req.query.releaseTitle;
+  const matches = releaseTitle.match(/\w+/gi);
+  
+  catalogClient
+    .get('/cds')
+    .then(res => console.log(res.body))
+    .catch(err => console.log(err));
+    
+  res.send(res.body);
 });
 
 // Start the server
