@@ -8,6 +8,7 @@ Query examples:
 ~~~
 /suggestions/?releaseId=123-asdas-456546
 /suggestions/?releaseId=123-asdas-456546&limit=5
+/suggestions/?releaseId[]=123-asdas-456546&releaseId[]=123-asdas-werwer&&limit=5
 ~~~
 The following npm scripts are available:
 
