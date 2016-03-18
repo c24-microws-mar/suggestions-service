@@ -5,6 +5,7 @@ const cors = require('cors');
 const endpoints = require('express-endpoints');
 const gracefulShutdown = require('http-graceful-shutdown');
 const agent = require('multiagent');
+const suggestionService = require('./suggestion.service');
 
 // Define some default values if not set in environment
 const PORT = process.env.PORT || 3000;
@@ -28,27 +29,23 @@ app.get(SERVICE_CHECK_HTTP, (req, res) => res.send({ uptime: process.uptime() })
 app.get(SERVICE_ENDPOINTS, endpoints());
 
 
-const catalogClient = agent.client({
-  discovery: 'consul',
-  discoveryServers: DISCOVERY_SERVERS,
-  serviceName: 'catalog-service'
-});
-
-
 // Add all other service routes
 app.get('/suggestions', (req, res) => {
   
-  // validation
+  if (req.query.releaseTitle === undefined) {
+    res.status(400).send('releaseTitle get param must be provided');
+    return;
+  }
   
-  const releaseTitle = req.query.releaseTitle;
-  const matches = releaseTitle.match(/\w+/gi);
+  if (req.query.releaseId === undefined) {
+    res.status(400).send('releaseId get param must be provided');
+    return;
+  }
   
-  catalogClient
-    .get('/cds')
-    .then(res => console.log(res.body))
-    .catch(err => console.log(err));
-    
-  res.send(res.body);
+  suggestionService.getSuggestions(req.query.releaseTitle, req.query.releaseId)
+    .then((suggestions) => {
+      res.send(suggestions);
+    });
 });
 
 // Start the server

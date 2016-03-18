@@ -1,11 +1,11 @@
-# example-service
+# suggestions-service
 
-[![Build Status](https://travis-ci.org/c24-microws-mar/example-service.svg)](https://travis-ci.org/c24-microws-mar/example-service)
-[![Dependencies](https://david-dm.org/c24-microws-mar/example-service.svg)](https://david-dm.org/badges/shields)
-
-This is a service example
+This is a suggestions service
 
 ## How to use
+
+Query examples:
+/suggestions/?releaseTitle=innuendo&releaseId=123-asdas-456546
 
 The following npm scripts are available:
 
