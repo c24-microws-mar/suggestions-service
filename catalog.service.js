@@ -13,7 +13,12 @@ const catalogService = {
   getCd: (id) => {
     return client.get(`/cd/${id}`)
       .then((res) => res.body);
-  }  
+  },
+  
+  getCdListByArtistId: (artistId) => {
+     return client.get(`/artist/${artistId}/cds`)
+      .then((res) => res.body);   
+  }
   
 };
 

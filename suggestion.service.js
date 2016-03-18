@@ -8,7 +8,7 @@ function getSuggestions(releaseIds, limit) {
   releaseIds = [].concat(releaseIds);
   
   const promises = releaseIds.map((releaseId) => catalogService.getCd(releaseId)
-    .then((cd) => catalogService.getCdList(cd.albumTitle))
+    .then((cd) => catalogService.getCdListByArtistId(cd.artistId))
   );
   
   return Promise.all(promises).then((lists) => {
@@ -16,6 +16,9 @@ function getSuggestions(releaseIds, limit) {
     const filteredCds = cdList.filter((cd) => releaseIds.indexOf(cd.albumId) === -1);
     return randomService.getRandomItems(filteredCds, limit);
   });
+}
+
+function pickCdsWithDifferentArtists(cds, limit) {
 }
 
 module.exports = {
